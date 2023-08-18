@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: bronze_layer
+    database: dss_dbt_catalog
+    schema: bronze
+    tables:
+      - name: customers
+      - name: lineitems
+      - name: nations
+      - name: orders
+      - name: parts
+      - name: part_suppliers
+      - name: regions
+      - name: suppliers
