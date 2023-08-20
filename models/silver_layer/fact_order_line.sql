@@ -23,9 +23,9 @@ SELECT
   CURRENT_DATE        AS  dwh_inserted_at,
   CURRENT_DATE        AS  dwh_upadted_at
 FROM
-  {{ref('dim_order')}}  ord
-  LEFT JOIN   {{ref('lineitems')}}      lnt   ON  lnt.order_id      = ord.order_id
-  LEFT JOIN   {{ref('dim_supplier')}}   sup   ON  sup.supplier_id   = lnt.supplier_id
-  LEFT JOIN   {{ref('dim_part')}}       part  ON  part.part_id      = lnt.part_id
-  LEFT JOIN   {{ref('dim_customer')}}   cust  ON  cust.customer_id  = ord.customer_id
-  LEFT JOIN   {{ref('dim_nation')}}     nat   ON  sup.nation_id     = nat.nation_id
+  {{ ref('dim_order') }}  ord
+  LEFT JOIN   {{ ref('lineitems') }}      lnt   ON  lnt.order_id      = ord.order_id
+  LEFT JOIN   {{ ref('dim_supplier') }}   sup   ON  sup.supplier_id   = lnt.supplier_id
+  LEFT JOIN   {{ ref('dim_part') }}       part  ON  part.part_id      = lnt.part_id
+  LEFT JOIN   {{ ref('dim_customer') }}   cust  ON  cust.customer_id  = ord.customer_id
+  LEFT JOIN   {{ ref('dim_nation') }}     nat   ON  sup.nation_id     = nat.nation_id

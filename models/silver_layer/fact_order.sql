@@ -15,7 +15,7 @@ SELECT
   CURRENT_DATE        AS  dwh_inserted_at,
   CURRENT_DATE        AS  dwh_upadted_at
 FROM
-  {{ref('dim_order')}} ord
-  LEFT JOIN   {{ref('dim_customer')}}  cust ON cust.customer_id = ord.customer_id
-  LEFT JOIN   {{ref('dim_nation')}}  nat    ON cust.nation_id   = nat.nation_id   
-  INNER JOIN  {{ref('dim_date')}}  dt       ON dt.date_full     = ord.order_date
+  {{ ref('dim_order') }} ord
+  LEFT JOIN   {{ ref('dim_customer') }}  cust ON cust.customer_id = ord.customer_id
+  LEFT JOIN   {{ ref('dim_nation') }}  nat    ON cust.nation_id   = nat.nation_id   
+  INNER JOIN  {{ ref('dim_date') }}  dt       ON dt.date_full     = ord.order_date
