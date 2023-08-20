@@ -1,5 +1,29 @@
 version: 2
 
 models:
+  - name: dim_counrty
+    description: 'Dimension table for countries'
+  
   - name: dim_customer
-    description: 'Dimension table for customer'
+    description: 'Dimension table for customers'
+  
+  - name: dim_date
+    description: 'Dimension table for dates'
+  
+  - name: dim_order
+    description: 'Dimension table for orders'
+  
+  - name: dim_part
+    description: 'Dimension table for parts'
+
+  - name: dim_region
+    description: 'Dimension table for regions'
+
+  - name: dim_supplier
+    description: 'Dimension table for suppliers'
+  
+  - name: fact_order
+    description: 'Fact table for orders'
+  
+  - name: fact_order_line
+    description: 'Fact table for order line items'
