@@ -6,7 +6,7 @@
 }}
 
 SELECT
-  MD5(part_name || '-' || part_id)  AS  part_key
+  MD5(part_name || '-' || part_id)  AS  part_key,
   part_id                           AS  part_id,
   part_name                         AS  part_name,
   manufacturer                      AS  part_address,
