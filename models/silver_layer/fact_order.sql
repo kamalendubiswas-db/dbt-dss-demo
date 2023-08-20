@@ -1,6 +1,6 @@
 {{
     config( materialized='table',
-            tag=['silver_layer','fact'],
+            tags=['fact'],
           )
 
 }}

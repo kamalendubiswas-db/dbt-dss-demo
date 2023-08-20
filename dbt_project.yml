@@ -38,5 +38,9 @@ models:
       +schema:  bronze
     silver_layer:
       +schema:  silver
+      +tags:
+        - silver_layer
     gold_layer:
       +schema:  gold
+      +tags:
+        - gold_layer
