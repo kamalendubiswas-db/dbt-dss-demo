@@ -24,7 +24,7 @@ SELECT
   CURRENT_DATE        AS  dwh_upadted_at
 FROM
   {{ this.schema }}_{{ ref('dim_order') }}  ord
-  LEFT JOIN   {{ source('bronze_layer', 'lineaitems') }}    lnt   ON  lnt.order_id      = ord.order_id
+  LEFT JOIN   {{ source('bronze_layer', 'lineitems') }}    lnt   ON  lnt.order_id      = ord.order_id
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_supplier') }}   sup   ON  sup.supplier_id   = lnt.supplier_id
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_part') }}       part  ON  part.part_id      = lnt.part_id
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_customer') }}   cust  ON  cust.customer_id  = ord.customer_id
