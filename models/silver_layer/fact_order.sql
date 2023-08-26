@@ -17,5 +17,5 @@ SELECT
 FROM
   {{ this.schema }}_{{ ref('dim_order') }} ord
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_customer') }}  cust ON cust.customer_id = ord.customer_id
-  LEFT JOIN   {{ this.schema }}_{{ ref('dim_nation') }}  nat    ON cust.nation_id   = nat.nation_id   
+  LEFT JOIN   {{ this.schema }}_{{ ref('dim_country') }}  nat   ON cust.nation_id   = nat.nation_id   
   INNER JOIN  {{ this.schema }}_{{ ref('dim_date') }}  dt       ON dt.date_full     = ord.order_date
