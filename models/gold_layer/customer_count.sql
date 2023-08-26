@@ -1,6 +1,6 @@
 {{
     config( materialized='ephemeral',
-            tags=['mart'],
+            tags='mart',
           )
 
 }}
