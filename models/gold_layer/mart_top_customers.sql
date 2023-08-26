@@ -29,7 +29,7 @@ select
   order_year,
   customer_id,
   customer_name,
-  total_amount
+  total_amount_ordered
 from
   rankedorders
 where

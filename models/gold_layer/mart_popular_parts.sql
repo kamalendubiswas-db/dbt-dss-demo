@@ -7,7 +7,7 @@
 
 select
   dps.part_name,
-  dps.part_phone,
+  dps.part_type,
   count(fol.part_key) as total_part_sold,
   count(distinct fol.supplier_key) as total_available_supplier
 from

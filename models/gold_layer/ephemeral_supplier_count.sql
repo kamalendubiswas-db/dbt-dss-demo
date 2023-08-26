@@ -1,6 +1,7 @@
 {{
     config( materialized='ephemeral',
             tags='mart',
+            alias='supplier_count'
           )
 
 }}
