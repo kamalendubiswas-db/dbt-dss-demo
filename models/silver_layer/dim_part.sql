@@ -11,7 +11,7 @@ SELECT
   part_name                         AS  part_name,
   manufacturer                      AS  part_address,
   brand                             AS  country_id,
-  type                              AS  part_phone,
+  type                              AS  part_type,
   size                              AS  account_balance,
   container                         AS  container,
   retail_price                      AS  retail_price,
