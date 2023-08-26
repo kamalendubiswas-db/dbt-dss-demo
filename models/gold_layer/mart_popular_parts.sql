@@ -20,3 +20,4 @@ order by
   total_part_sold desc
 limit
   100
+  
