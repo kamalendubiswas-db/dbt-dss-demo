@@ -7,6 +7,7 @@
 
 SELECT
   ord.order_key       AS  order_key,
+  cust.customer_key   AS  customer_key,
   part.part_key       AS  part_key,
   sup.supplier_key    AS  supplier_key,
   lnt.line_number     AS  line_number,
@@ -19,7 +20,6 @@ SELECT
   lnt.commit_date     AS  commit_date,
   ord.total_price     AS  total_price,
   ord.order_status    AS  order_status,
-  cust.customer_key   AS  customer_key,
   CURRENT_DATE        AS  dwh_inserted_at,
   CURRENT_DATE        AS  dwh_upadted_at
 FROM
@@ -28,4 +28,3 @@ FROM
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_supplier') }}   sup   ON  sup.supplier_id   = lnt.supplier_id
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_part') }}       part  ON  part.part_id      = lnt.part_id
   LEFT JOIN   {{ this.schema }}_{{ ref('dim_customer') }}   cust  ON  cust.customer_id  = ord.customer_id
-  LEFT JOIN   {{ this.schema }}_{{ ref('dim_country') }}    nat   ON  sup.nation_id     = nat.nation_id
