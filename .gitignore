@@ -166,3 +166,5 @@ logs/
 # end dbt Cloud content
 
 .DS_Store
+profiles.yml
+.user.yml

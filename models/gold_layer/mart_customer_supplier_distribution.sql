@@ -12,7 +12,7 @@ select
   cc.total_customers,
   cc.total_amount_spent
 from
-  {{ ref('supplier_count') }}  sc
-  inner join {{ ref('customer_count') }}  cc on sc.country = cc.country
+  {{ ref('ephemeral_supplier_count') }}  sc
+  inner join {{ ref('ephemeral_customer_count') }}  cc on sc.country = cc.country
 order by
   country
