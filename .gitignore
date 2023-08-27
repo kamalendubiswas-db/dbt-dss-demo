@@ -168,3 +168,6 @@ logs/
 .DS_Store
 profiles.yml
 .user.yml
+elementary_output.json
+elementary_report.html
+dbt.log.legacy
