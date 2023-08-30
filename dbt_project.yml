@@ -32,11 +32,19 @@ clean-targets:         # directories to be removed by `dbt clean`
 # as tables. These settings can be overridden in the individual model files
 # using the `{{ config(...) }}` macro.
 models:
+
+  elementary:
+      +schema:  elementary
+      
   dss_dbt_project:
     # Applies to all files under models/example/
     bronze_layer:
       +schema:  bronze
     silver_layer:
       +schema:  silver
+      +tags:
+        - silver_layer
     gold_layer:
       +schema:  gold
+      +tags:
+        - gold_layer
