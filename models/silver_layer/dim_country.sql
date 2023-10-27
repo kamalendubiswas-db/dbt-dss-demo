@@ -12,4 +12,4 @@ SELECT
   CURRENT_DATE()                        AS dwh_inserted_at,
   CURRENT_DATE()                        AS dwh_updated_at
 FROM
-  {{ source('bronze_layer', 'nations') }}
+  {{ source('bronze_layer', 'raw_nations') }}

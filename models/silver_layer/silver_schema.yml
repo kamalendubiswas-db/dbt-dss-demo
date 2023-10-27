@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: dim_counrty
+  - name: dim_country
     description: 'Dimension table for countries'
   
   - name: dim_customer
