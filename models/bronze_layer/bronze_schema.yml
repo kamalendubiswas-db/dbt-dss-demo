@@ -5,11 +5,11 @@ sources:
     database: dss_dbt_catalog
     schema: bronze
     tables:
-      - name: customers
-      - name: lineitems
-      - name: nations
-      - name: orders
-      - name: parts
-      - name: part_suppliers
-      - name: regions
-      - name: suppliers
+      - name: raw_customers
+      - name: raw_lineitems
+      - name: raw_nations
+      - name: raw_orders
+      - name: raw_parts
+      - name: raw_part_suppliers
+      - name: raw_regions
+      - name: raw_suppliers

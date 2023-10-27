@@ -17,4 +17,4 @@ SELECT
     CURRENT_DATE          AS  dwh_inserted_at,
     CURRENT_DATE          AS  dwh_upadted_at
 FROM
-    {{ source('bronze_layer', 'orders') }};
+    {{ source('bronze_layer', 'raw_orders') }};

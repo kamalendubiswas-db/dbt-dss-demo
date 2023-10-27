@@ -167,6 +167,7 @@ logs/
 
 .DS_Store
 profiles.yml
+copy_profiles.yml
 .user.yml
 elementary_output.json
 elementary_report.html

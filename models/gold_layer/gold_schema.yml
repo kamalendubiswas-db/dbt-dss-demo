@@ -1,11 +1,11 @@
 version: 2
 
 models:
-  - name: mart_top_customer
+  - name: mart_top_customers
     description: 'mart table for top 10 customers for each year'
   - name: mart_customer_supplier_distribution
     description: 'mart table for customer and supplier distribution across different countries'
-  - name: mart_top_supplier
+  - name: mart_top_suppliers
     description: 'mart table for top 10 customers for each year'
-  - name: mart_popular_products
+  - name: mart_popular_parts
     description: 'mart table for popular parts ordered'
