@@ -1,0 +1,7 @@
+version: 2
+
+seeds:
+  - name: raw_region_seed
+    config:
+      delimiter: ","
+      quote_columns: False

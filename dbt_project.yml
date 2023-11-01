@@ -48,3 +48,9 @@ models:
       +schema:  gold
       +tags:
         - gold_layer
+
+seeds:
+  dss_dbt_project:
+    +enabled: true
+    +tags:  "seed"
+    +schema:  bronze
