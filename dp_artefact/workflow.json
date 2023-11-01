@@ -1,0 +1,649 @@
+{
+  "name": "dbt_dp_factory_job",
+  "tasks": [
+    {
+      "task_key": "model_dss_dbt_project_dim_supplier-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_supplier"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_supplier-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_supplier"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_supplier-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_fact_order-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select fact_order"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_order-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_customer-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_country-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_date-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_fact_order-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select fact_order"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_customer-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_customer"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_customer-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_customer"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_customer-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_country-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_country"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_country-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_country"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_country-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_part-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_part"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_part-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_part"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_part-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_region-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_region"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_region-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_region"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_region-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_fact_order_line-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select fact_order_line"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_order-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_supplier-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_part-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_customer-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_fact_order_line-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select fact_order_line"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order_line-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_date-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_date"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_date-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_date"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_date-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_order-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select dim_order"
+        ]
+      },
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_dim_order-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select dim_order"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_dim_order-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_popular_parts-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select mart_popular_parts"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order_line-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_part-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_popular_parts-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select mart_popular_parts"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_mart_popular_parts-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_customer_supplier_distribution-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select mart_customer_supplier_distribution"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order_line-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_supplier-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_country-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_customer-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_customer_supplier_distribution-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select mart_customer_supplier_distribution"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_mart_customer_supplier_distribution-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_top_customers-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select mart_top_customers"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_date-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_customer-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_top_customers-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select mart_top_customers"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_mart_top_customers-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_top_suppliers-run",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt run --profiles-dir profiles.yml --select mart_top_suppliers"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_fact_order_line-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_order-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_date-test"
+        },
+        {
+          "task_key": "model_dss_dbt_project_dim_supplier-test"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    },
+    {
+      "task_key": "model_dss_dbt_project_mart_top_suppliers-test",
+      "dbt_task": {
+        "project_directory": "dbt_dss_demo",
+        "commands": [
+          "dbt deps",
+          "dbt test --profiles-dir profiles.yml --select mart_top_suppliers"
+        ]
+      },
+      "depends_on": [
+        {
+          "task_key": "model_dss_dbt_project_mart_top_suppliers-run"
+        }
+      ],
+      "libraries": [
+        {
+          "pypi": {
+            "package": "dbt-databricks>=1.0.0,<2.0.0"
+          }
+        }
+      ],
+      "job_cluster_key": "kb_dbt_test_cluster"
+    }
+  ],
+  "job_clusters": [
+    {
+      "job_cluster_key": "kb_dbt_test_cluster",
+      "new_cluster": {
+        "autoscale": {
+          "min_workers": 1,
+          "max_workers": 1
+        },
+        "spark_version": "13.3.x-scala2.12",
+        "spark_conf": {},
+        "aws_attributes": {
+          "first_on_demand": 1,
+          "availability": "SPOT_WITH_FALLBACK",
+          "zone_id": "auto",
+          "instance_profile_arn": null,
+          "spot_bid_price_percent": 100,
+          "ebs_volume_count": 0
+        },
+        "node_type_id": "i3.xlarge",
+        "ssh_public_keys": [],
+        "custom_tags": {},
+        "spark_env_vars": {
+          "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+        },
+        "init_scripts": [],
+        "data_security_mode": "SINGLE_USER",
+        "runtime_engine": "PHOTON"
+      }
+    }
+  ],
+  "git_source": {
+    "git_url": "https://github.com/kamalendubiswas-db/dbt-dss-demo",
+    "git_provider": "gitHub",
+    "git_branch": "dev"
+  },
+  "format": "MULTI_TASK"
+}
