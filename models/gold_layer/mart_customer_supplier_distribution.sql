@@ -1,8 +1,10 @@
 {{
-    config( materialized='view',
-            tags='mart',
-          )
+    config(
+        materialized='materialized_view',
+        tblproperties={"delta.enableChangeDataFeed":"true"},
+        tags='mart',
 
+    )
 }}
 
 select
