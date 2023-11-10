@@ -2,7 +2,6 @@ version: 2
 
 sources:
   - name: bronze_layer
-    database: dss_dbt_catalog
     schema: bronze
     tables:
       - name: raw_customers
@@ -11,5 +10,4 @@ sources:
       - name: raw_orders
       - name: raw_parts
       - name: raw_part_suppliers
-      - name: raw_regions
       - name: raw_suppliers
