@@ -36,7 +36,7 @@ models:
       - name: order_status
         tests:
           - dbt_expectations.expect_column_values_to_be_in_set:
-              value_set: ['O','F']
+              value_set: ['O','F', 'P']
               quote_values: true # (Optional. Default is 'true'.)
               row_condition: "order_key is not null" # (Optional)
               config:
