@@ -27,7 +27,7 @@ Our primary objectives with this integrated dbt-Databricks project are:
 To begin exploring this integrated dbt-Databricks project, refer to the instructions in the Installation section below. Dive into the dbt models, explore the integration with Databricks, and contribute to enhancing our data transformation and analytics capabilities.
 
 
-# dbt-databricks Adapter
+## dbt-databricks Adapter
 
 The [dbt-databricks] (https://github.com/databricks/dbt-databricks) adapter contains all of the code enabling dbt to work with Databricks. This adapter is based off the amazing work done in [dbt-spark](https://github.com/dbt-labs/dbt-spark). Some key features include:
 
