@@ -1,0 +1,18 @@
+# The main job for dab_template_project
+resources:
+  jobs:
+    dbt_dss_setup_job:
+      name: dbt_dss_setup_job
+
+      tasks:
+        - task_key: notebook_task
+          job_cluster_key: job_cluster
+          notebook_task:
+            notebook_path: ../databricks_notebook/Databricks_Environment_Setup.py
+
+      job_clusters:
+        - job_cluster_key: job_cluster
+          new_cluster:
+            spark_version: 13.3.x-scala2.12
+            node_type_id: Standard_D3_v2
+            num_workers: 1
