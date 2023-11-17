@@ -29,7 +29,7 @@ To begin exploring this integrated dbt-Databricks project, refer to the instruct
 
 ## dbt-databricks Adapter
 
-The [dbt-databricks] (https://github.com/databricks/dbt-databricks) adapter contains all of the code enabling dbt to work with Databricks. This adapter is based off the amazing work done in [dbt-spark](https://github.com/dbt-labs/dbt-spark). Some key features include:
+The [dbt-databricks](https://github.com/databricks/dbt-databricks) adapter contains all of the code enabling dbt to work with Databricks. This adapter is based off the amazing work done in [dbt-spark](https://github.com/dbt-labs/dbt-spark). Some key features include:
 
 - **Easy setup**. No need to install an ODBC driver as the adapter uses pure Python APIs.
 - **Open by default**. For example, it uses the the open and performant [Delta](https://delta.io/) table format by default. This has many benefits, including letting you use `MERGE` as the the default incremental materialization strategy.
