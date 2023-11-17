@@ -7,19 +7,19 @@ Welcome to the **dbt-dss-demo** repository! This project combines the power of d
 
 In this repository, we harness the strengths of dbt for:
 
-**Data Modeling**: Utilizing dbt to define, test, and deploy data transformation logic in a version-controlled, SQL-based environment.
-**Testing and Validation**: Implementing tests within dbt to ensure the quality and accuracy of transformed data.
-**Databricks Integration**: Leveraging Databricks' scalable computing power and collaborative environment for executing dbt transformations at scale.
+-**Data Modeling**: Utilizing dbt to define, test, and deploy data transformation logic in a version-controlled, SQL-based environment.
+-**Testing and Validation**: Implementing tests within dbt to ensure the quality and accuracy of transformed data.
+-**Databricks Integration**: Leveraging Databricks' scalable computing power and collaborative environment for executing dbt transformations at scale.
 
 
 ## Goals and Objectives
 
 Our primary objectives with this integrated dbt-Databricks project are:
 
-**Scalable Transformations**: Harness the distributed computing capabilities of Databricks to execute dbt transformations efficiently on large datasets.
-**Collaboration and Productivity**: Enable collaboration among data engineers, analysts, and data scientists within the Databricks environment while maintaining version control and documentation standards through dbt.
-**Optimized Analytics Pipeline**: Create a streamlined analytics pipeline by combining the strengths of dbt for data modeling and Databricks for scalable computation.
-**Unifying Batch and Streaming workloads**: Leveraging Databricks Streaming Tables and Materialized Views to unify Btach and Streaming workloads
+-**Scalable Transformations**: Harness the distributed computing capabilities of Databricks to execute dbt transformations efficiently on large datasets.
+-**Collaboration and Productivity**: Enable collaboration among data engineers, analysts, and data scientists within the Databricks environment while maintaining version control and documentation standards through dbt.
+-**Optimized Analytics Pipeline**: Create a streamlined analytics pipeline by combining the strengths of dbt for data modeling and Databricks for scalable computation.
+-**Unifying Batch and Streaming workloads**: Leveraging Databricks Streaming Tables and Materialized Views to unify Btach and Streaming workloads
 
 
 ## Getting Started
