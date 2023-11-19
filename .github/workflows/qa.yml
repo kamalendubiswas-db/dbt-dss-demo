@@ -41,7 +41,7 @@
 #           DATABRICKS_BUNDLE_ENV: qa
 
 #   # Validate, deploy, and then run the bundle.
-#   pipeline_update:
+#   pipeline_setup:
 #     name: "Run pipeline update"
 #     runs-on: ubuntu-latest
 
@@ -62,6 +62,22 @@
 #           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
 #           DATABRICKS_BUNDLE_ENV: qa
 
+#   # Validate, deploy, and then run the bundle.
+#   pipeline_run:
+#     name: "Run pipeline update"
+#     runs-on: ubuntu-latest
+
+#     # Run the "deploy" job first.
+#     needs:
+#       - pipeline_setup
+
+#     steps:
+#       # Check out this repo, so that this workflow can access it.
+#       - uses: actions/checkout@v3
+
+#       # Use the downloaded Databricks CLI.
+#       - uses: databricks/setup-cli@main
+
 #       - run: databricks bundle run dbt_dss_job --refresh-all
 #         working-directory: .
 #         env:
@@ -69,12 +85,12 @@
 #           DATABRICKS_BUNDLE_ENV: qa
 
 #   pipeline_destroy:
-#     name: "Run pipeline update"
+#     name: "Destroy staging artefacts"
 #     runs-on: ubuntu-latest
 
 #     # Run the "deploy" job first.
 #     needs:
-#       - deploy
+#       - pipeline_run
 
 #     steps:
 #       # Check out this repo, so that this workflow can access it.

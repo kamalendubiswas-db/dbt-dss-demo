@@ -13,6 +13,8 @@
 #     branches:
 #       - main
 
+# Only deploy step needed in PRD as job is normally scheduled
+
 # jobs:
 #   deploy:
 #     name: "Deploy bundle"
@@ -29,36 +31,6 @@
 #       # Deploy the bundle to the "prod" target as defined
 #       # in the bundle's settings file.
 #       - run: databricks bundle deploy
-#         working-directory: .
-#         env:
-#           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-#           DATABRICKS_BUNDLE_ENV: prod
-
-#   # Validate, deploy, and then run the bundle.
-#   pipeline_update:
-#     name: "Run pipeline update"
-#     runs-on: ubuntu-latest
-
-#     # Run the "deploy" job first.
-#     needs:
-#       - deploy
-
-#     steps:
-#       # Check out this repo, so that this workflow can access it.
-#       - uses: actions/checkout@v3
-
-#       # Use the downloaded Databricks CLI.
-#       - uses: databricks/setup-cli@main
-
-#       # Run the Databricks workflow named "my-job" as defined in the
-#       # bundle that was just deployed.
-#       - run: databricks bundle run dbt_dss_setup_job
-#         working-directory: .
-#         env:
-#           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-#           DATABRICKS_BUNDLE_ENV: prod
-
-#       - run: databricks bundle run dbt_dss_job
 #         working-directory: .
 #         env:
 #           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
