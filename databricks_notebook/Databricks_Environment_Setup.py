@@ -4,7 +4,12 @@ dbutils.widgets.text("Catalog Name", "dbt_example_catalog")
 # COMMAND ----------
 
 # DBTITLE 1,Create catalog, schemas and volume
+import os
+
 catalog_name = dbutils.widgets.getArgument("Catalog Name")
+os.environ['catalog_name'] = catalog_name
+
+print(f"Creating or using catalog: {catalog_name}")
 
 spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
 
@@ -13,6 +18,15 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.silver")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.gold")
 
 spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.raw_data;")
+
+# COMMAND ----------
+
+# DBTITLE 1,Download data files to volume
+# MAGIC %sh
+# MAGIC rm -rf dbt-dss-demo-dev.zip \
+# MAGIC   && curl -LJO https://github.com/kamalendubiswas-db/dbt-dss-demo/archive/dev.zip \
+# MAGIC   && unzip -jo dbt-dss-demo-dev.zip 'dbt-dss-demo-dev/data/*.csv' -d /Volumes/$catalog_name/bronze/raw_data \
+# MAGIC   && rm -rf dbt-dss-demo-dev.zip
 
 # COMMAND ----------
 
@@ -41,6 +55,25 @@ cleaned_customers = raw_customers.withColumnsRenamed(
                                                      "_c8": "extra"}
                                                   )
 cleaned_customers.write.saveAsTable(f"{catalog_name}.bronze.raw_customers", mode="overwrite")
+
+
+# COMMAND ----------
+
+# DBTITLE 1,Region data load from the UC Volume
+raw_regions = (spark.read
+  .format("csv")
+  .option("header", "false")
+  .option("inferSchema", "true")
+  .option("delimiter", "|")
+  .load(f"{raw_data}/region.csv")
+)
+cleaned_regions = raw_regions.withColumnsRenamed(
+                                                    {"_c0": "region_id",
+                                                     "_c1": "region_name",
+                                                     "_c2": "comment",
+                                                     "_c3": "extra"}
+                                                  )
+cleaned_regions.write.saveAsTable(f"{catalog_name}.bronze.raw_regions", mode="overwrite")
 
 
 # COMMAND ----------

@@ -172,3 +172,5 @@ copy_profiles.yml
 elementary_output.json
 elementary_report.html
 dbt.log.legacy
+.databricks
+.vscode
