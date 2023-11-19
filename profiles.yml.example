@@ -1,11 +1,11 @@
-dbt_dss_demo:
+default:
   outputs:
     dev:
-      catalog: <catalog_name>
+      type: databricks
+      catalog: <default_catalog_name>
       schema: <default_schema_name>
       host: <databricks_host_name>
       http_path: <databricks_host_http_path>
       threads: <thread_count>
       token: "{{ env_var('DBT_ACCESS_TOKEN') }}"
-      type: databricks
   target: dev
