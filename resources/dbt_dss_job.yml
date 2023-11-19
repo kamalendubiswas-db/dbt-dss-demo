@@ -10,8 +10,8 @@ resources:
               - dbt deps
               - dbt seed
               - dbt run
-            warehouse_id: 2e78d4a8647e3893
-            catalog: dbt_example_catalog
+            warehouse_id: ${var.warehouse_id} 
+            catalog: ${var.dbt_catalog}
           job_cluster_key: dbt_CLI
           libraries:
             - pypi:

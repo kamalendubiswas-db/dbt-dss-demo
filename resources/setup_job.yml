@@ -9,6 +9,8 @@ resources:
           job_cluster_key: job_cluster
           notebook_task:
             notebook_path: ../databricks_notebook/Databricks_Environment_Setup.py
+            base_parameters:
+              Catalog Name: ${var.dbt_catalog}
 
       job_clusters:
         - job_cluster_key: job_cluster

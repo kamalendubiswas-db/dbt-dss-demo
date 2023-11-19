@@ -4,7 +4,12 @@ dbutils.widgets.text("Catalog Name", "dbt_example_catalog")
 # COMMAND ----------
 
 # DBTITLE 1,Create catalog, schemas and volume
+import os
+
 catalog_name = dbutils.widgets.getArgument("Catalog Name")
+os.environ['catalog_name'] = catalog_name
+
+print(f"Creating or using catalog: {catalog_name}")
 
 spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
 
@@ -21,7 +26,7 @@ spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.raw_data;")
 # MAGIC %sh
 # MAGIC rm -rf dbt-dss-demo-dev.zip \
 # MAGIC   && curl -LJO https://github.com/kamalendubiswas-db/dbt-dss-demo/archive/dev.zip \
-# MAGIC   && unzip -jo dbt-dss-demo-dev.zip 'dbt-dss-demo-dev/data/*.csv' -d /Volumes/dbt_example_catalog/bronze/raw_data \
+# MAGIC   && unzip -jo dbt-dss-demo-dev.zip 'dbt-dss-demo-dev/data/*.csv' -d /Volumes/$catalog_name/bronze/raw_data \
 # MAGIC   && rm -rf dbt-dss-demo-dev.zip
 
 # COMMAND ----------
