@@ -19,7 +19,7 @@ Our primary objectives with this integrated dbt-Databricks project are:
 - **Scalable Transformations**: Harness the distributed computing capabilities of Databricks to execute dbt transformations efficiently on large datasets.
 - **Collaboration and Productivity**: Enable collaboration among data engineers, analysts, and data scientists within the Databricks environment while maintaining version control and documentation standards through dbt.
 - **Optimized Analytics Pipeline**: Create a streamlined analytics pipeline by combining the strengths of dbt for data modeling and Databricks for scalable computation.
-- **Unifying Batch and Streaming workloads**: Leveraging Databricks Streaming Tables and Materialized Views to unify Btach and Streaming workloads
+- **Unifying Batch and Streaming workloads**: Leveraging Databricks Streaming Tables and Materialized Views to unify Batch and Streaming workloads
 
 
 ## Getting Started
