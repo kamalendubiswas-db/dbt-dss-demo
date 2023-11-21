@@ -8,7 +8,7 @@
 with rankedorders as (
     select
       dt.year as order_year,
-      dsp.supplier_id,
+      dsp.supplier_id as supplier_id,
       dsp.supplier_name,
       sum(fol.total_price) as total_amount_supplied,
       row_number() over (
