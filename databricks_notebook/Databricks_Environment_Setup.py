@@ -59,25 +59,6 @@ cleaned_customers.write.saveAsTable(f"{catalog_name}.bronze.raw_customers", mode
 
 # COMMAND ----------
 
-# DBTITLE 1,Region data load from the UC Volume
-raw_regions = (spark.read
-  .format("csv")
-  .option("header", "false")
-  .option("inferSchema", "true")
-  .option("delimiter", "|")
-  .load(f"{raw_data}/region.csv")
-)
-cleaned_regions = raw_regions.withColumnsRenamed(
-                                                    {"_c0": "region_id",
-                                                     "_c1": "region_name",
-                                                     "_c2": "comment",
-                                                     "_c3": "extra"}
-                                                  )
-cleaned_regions.write.saveAsTable(f"{catalog_name}.bronze.raw_regions", mode="overwrite")
-
-
-# COMMAND ----------
-
 # DBTITLE 1,Orders data load from the UC Volume
 raw_orders = (spark.read
   .format("csv")
