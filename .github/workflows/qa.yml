@@ -34,7 +34,7 @@ jobs:
 
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
-      - run: databricks --log-level debug bundle deploy
+      - run: databricks bundle deploy
         working-directory: .
         env:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
