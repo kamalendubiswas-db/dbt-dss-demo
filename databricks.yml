@@ -24,7 +24,7 @@ targets:
     mode: development
     default: true
     variables:
-      dbt_catalog: DEV_dss_dbt_catalog
+      dbt_catalog: dev_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
 
@@ -34,7 +34,7 @@ targets:
   qa:
     mode: development
     variables:
-      dbt_catalog: QA_dss_dbt_catalog
+      dbt_catalog: qa_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
 
