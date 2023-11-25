@@ -38,3 +38,6 @@ models:
 
   - name: fact_order_line
     description: 'Fact table for order line items'
+  
+  - name: stream_order_line
+    description: 'Streaming table for order lineitems'

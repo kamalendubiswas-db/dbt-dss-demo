@@ -9,3 +9,7 @@ models:
     description: 'mart table for top 10 customers for each year'
   - name: mart_popular_parts
     description: 'mart table for popular parts ordered'
+  - name: stream_parts_aggregates
+    description: 'live table for parts sold'
+  - name: stream_returned_orders_counts
+    description: 'live table for returned orders'
