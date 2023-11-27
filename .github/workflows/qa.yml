@@ -40,8 +40,30 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
           DATABRICKS_BUNDLE_ENV: qa
 
+  # Validate, deploy, and then run the bundle. Optional step, run if needed... takes time
+  # pipeline_setup:
+  #   name: "Run pipeline update"
+  #   runs-on: ubuntu-latest
+
+  #   # Run the "deploy" job first.
+  #   needs:
+  #     - deploy
+
+  #   steps:
+  #     # Check out this repo, so that this workflow can access it.
+  #     - uses: actions/checkout@v3
+
+  #     # Use the downloaded Databricks CLI.
+  #     - uses: databricks/setup-cli@main
+
+  #     - run: databricks bundle run dbt_dss_setup_job --refresh-all
+  #       working-directory: .
+  #       env:
+  #         DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+  #         DATABRICKS_BUNDLE_ENV: qa
+
   # Validate, deploy, and then run the bundle.
-  pipeline_setup:
+  pipeline_run:
     name: "Run pipeline update"
     runs-on: ubuntu-latest
 
@@ -51,29 +73,7 @@ jobs:
 
     steps:
       # Check out this repo, so that this workflow can access it.
-      - uses: actions/checkout@v3
-
-      # Use the downloaded Databricks CLI.
-      - uses: databricks/setup-cli@main
-
-      - run: databricks bundle run dbt_dss_setup_job --refresh-all
-        working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
-
-  # Validate, deploy, and then run the bundle.
-  pipeline_run:
-    name: "Run pipeline update"
-    runs-on: ubuntu-latest
-
-    # Run the "deploy" job first.
-    needs:
-      - pipeline_setup
-
-    steps:
-      # Check out this repo, so that this workflow can access it.
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Use the downloaded Databricks CLI.
       - uses: databricks/setup-cli@main
