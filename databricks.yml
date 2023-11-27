@@ -13,6 +13,9 @@ variables:
   warehouse_id:
     description: Databricks SQL warehouse to use
     default: 2e78d4a8647e3893
+  git_branch:
+    description: Catalog to use
+    default: ${bundle.git.branch}
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -45,6 +48,8 @@ targets:
     # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
     # to a path that is not specific to the current user.
     mode: production
+    variables:
+      dbt_catalog: prod_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
       root_path: /Shared/.bundle/prod/${bundle.name}

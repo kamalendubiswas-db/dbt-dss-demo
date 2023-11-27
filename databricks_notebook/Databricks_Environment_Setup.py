@@ -18,6 +18,7 @@ spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.silver")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.gold")
 
 spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.raw_data;")
+spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.dbt_artefacts;")
 
 # COMMAND ----------
 
