@@ -8,7 +8,7 @@ resources:
             project_directory: ""
             commands:
               - dbt deps
-              - dbt build --target-path /Volumes/${var.dbt_catalog}/bronze/dbt_artefacts/${bundle.git.branch}/main_run
+              - dbt build
             warehouse_id: ${var.warehouse_id} 
             catalog: ${var.dbt_catalog}
           job_cluster_key: dbt_CLI
