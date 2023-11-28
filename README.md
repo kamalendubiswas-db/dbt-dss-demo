@@ -65,3 +65,26 @@ The [dbt-databricks](https://github.com/databricks/dbt-databricks) adapter conta
 ```
 
 We're excited to have you onboard and explore the fusion of dbt and Databricks within our data analytics ecosystem.
+
+## Deploying
+
+This project uses Databricks Asset bundles to deploy two jobs:
+* dbt_dss_job - Used to execute the DBT project stored in GIT
+* dbt_dss_setup_job - Used to run the setup scripts to create Catalogs, Volumes and Schemas
+
+To deploy these jobs you first need to configure the `Databricks.yml` file to point to the workspace(s) you want to deploy the project to.
+
+You also need to configure the two variables `catalog_name` and `warehouse_id`
+
+To deploy the jobs using bundles, you need to run two commands:
+
+```bash
+databricks bundle deploy #Deploys artefacts to the workspace
+databricks bundle run #Starts one of the jobs
+```
+
+Read more about Databricks Asset bundles and how to install it [here](https://docs.databricks.com/en/dev-tools/bundles/index.html)
+
+### CI/CD
+
+We have chosen to show an example using Github Actions, but it is of course possible to implement a CI/CD process in the tool of your choice. For this example you, need to provide a PAT as `SP_TOKEN` secret variable in github.
