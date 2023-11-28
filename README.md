@@ -45,22 +45,24 @@ The [dbt-databricks](https://github.com/databricks/dbt-databricks) adapter conta
 ├── Pipfile.lock
 ├── README.md
 ├── analyses
-├── data #sample data
+├── bundle_config_schema.json   #Databricks Asset Bundles config
+├── data        #sample dataset used
+├── databricks.yml #Databricks Asset Bundles yml
 ├── databricks_notebook
-│   └── Databricks_Environment_Setup.py  #initial setup of bronze layer
+│   └── Databricks_Environment_Setup.py #Databricks notebook for initial bronze layer
 ├── dbt_project.yml
-├── profiles.yml.example #rename to `profiles.yml`
 ├── macros
-│   └── generate_schema_name.sql #macro of custom schema
 ├── models
 │   ├── bronze_layer
 │   ├── silver_layer
 │   └── gold_layer
 ├── packages.yml
-├── seeds
-│   ├── properties.yml
-│   └── raw_region_seed.csv #seed data for regions
-├── snapshots
+├── profiles.yml.example    #rename to `profiles.yml` and fill the connection details
+├── resources
+│   ├── dbt_dss_job.yml     #dbt job config
+│   └── setup_job.yml       #initial setup job config
+├── seeds                    
+├── snapshots               
 └── tests
 ```
 
