@@ -13,6 +13,9 @@ variables:
   warehouse_id:
     description: Databricks SQL warehouse to use
     default: 2e78d4a8647e3893
+  git_branch:
+    description: Catalog to use
+    default: ${bundle.git.branch}
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -24,9 +27,16 @@ targets:
     mode: development
     default: true
     variables:
-      dbt_catalog: DEV_dss_dbt_catalog
+      dbt_catalog: dev_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
+    resources:
+      jobs:
+        dbt_dss_job:
+          git_source:
+            git_url: https://github.com/kamalendubiswas-db/dbt-dss-demo
+            git_provider: gitHub
+            git_branch: ${bundle.git.branch}
 
   # Optionally, there could be a 'staging' target here.
   # (See Databricks docs on CI/CD at https://docs.databricks.com/dev-tools/bundles/index.html.)
@@ -34,9 +44,16 @@ targets:
   qa:
     mode: development
     variables:
-      dbt_catalog: QA_dss_dbt_catalog
+      dbt_catalog: qa_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
+    resources:
+      jobs:
+        dbt_dss_job:
+          git_source:
+            git_url: https://github.com/kamalendubiswas-db/dbt-dss-demo
+            git_provider: gitHub
+            git_commit: ${bundle.git.commit}
 
   # The 'prod' target, used for production deployment.
   prod:
@@ -45,6 +62,8 @@ targets:
     # /Users/${workspace.current_user.userName}/.bundle/${bundle.target}/${bundle.name}
     # to a path that is not specific to the current user.
     mode: production
+    variables:
+      dbt_catalog: prod_dss_dbt_catalog
     workspace:
       host: https://adb-984752964297111.11.azuredatabricks.net
       root_path: /Shared/.bundle/prod/${bundle.name}
@@ -53,4 +72,11 @@ targets:
       # a service principal could be used here using service_principal_name
       # (see Databricks documentation).
       user_name: gustav.byberg@databricks.com
+    resources:
+      jobs:
+        dbt_dss_job:
+          git_source:
+            git_url: https://github.com/kamalendubiswas-db/dbt-dss-demo
+            git_provider: gitHub
+            git_branch: dev
     

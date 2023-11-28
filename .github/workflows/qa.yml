@@ -34,72 +34,7 @@ jobs:
 
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
-      - run: databricks --log-level debug bundle deploy
-        working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
-
-  # Validate, deploy, and then run the bundle.
-  pipeline_setup:
-    name: "Run pipeline update"
-    runs-on: ubuntu-latest
-
-    # Run the "deploy" job first.
-    needs:
-      - deploy
-
-    steps:
-      # Check out this repo, so that this workflow can access it.
-      - uses: actions/checkout@v3
-
-      # Use the downloaded Databricks CLI.
-      - uses: databricks/setup-cli@main
-
-      - run: databricks bundle run dbt_dss_setup_job --refresh-all
-        working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
-
-  # Validate, deploy, and then run the bundle.
-  pipeline_run:
-    name: "Run pipeline update"
-    runs-on: ubuntu-latest
-
-    # Run the "deploy" job first.
-    needs:
-      - pipeline_setup
-
-    steps:
-      # Check out this repo, so that this workflow can access it.
-      - uses: actions/checkout@v3
-
-      # Use the downloaded Databricks CLI.
-      - uses: databricks/setup-cli@main
-
-      - run: databricks bundle run dbt_dss_job --refresh-all
-        working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
-
-  pipeline_destroy:
-    name: "Destroy staging artefacts"
-    runs-on: ubuntu-latest
-
-    # Run the "deploy" job first.
-    needs:
-      - pipeline_run
-
-    steps:
-      # Check out this repo, so that this workflow can access it.
-      - uses: actions/checkout@v3
-
-      # Use the downloaded Databricks CLI.
-      - uses: databricks/setup-cli@main
-
-      - run: databricks bundle destroy --auto-approve
+      - run: databricks bundle deploy
         working-directory: .
         env:
           DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
