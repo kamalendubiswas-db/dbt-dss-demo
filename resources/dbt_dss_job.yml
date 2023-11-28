@@ -38,4 +38,4 @@ resources:
       git_source:
         git_url: https://github.com/kamalendubiswas-db/dbt-dss-demo
         git_provider: gitHub
-        git_commit: ${bundle.git.commit}
+        git_branch: ${bundle.git.branch}
