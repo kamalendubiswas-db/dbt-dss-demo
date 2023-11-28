@@ -8,9 +8,23 @@ resources:
             project_directory: ""
             commands:
               - dbt deps
-              - dbt build
+              - dbt build --target-path /Volumes/${var.dbt_catalog}/bronze/dbt_artefacts/${bundle.git.branch}/main_run
             warehouse_id: ${var.warehouse_id} 
             catalog: ${var.dbt_catalog}
+          job_cluster_key: dbt_CLI
+          libraries:
+            - pypi:
+                package: dbt-databricks>=1.0.0,<2.0.0
+        - task_key: dbt_repair_run
+          depends_on:
+            - task_key: dbt_dss_job
+          run_if: ALL_FAILED
+          dbt_task:
+            project_directory: ""
+            commands:
+              - dbt deps
+              - dbt build --select "result:error+ 1+result:fail" --defer --state /Volumes/${var.dbt_catalog}/bronze/dbt_artefacts/${bundle.git.branch}/main_run --target-path /Volumes/${var.dbt_catalog}/bronze/dbt_artefacts/${bundle.git.branch}/repair_run
+            warehouse_id: 2e78d4a8647e3893
           job_cluster_key: dbt_CLI
           libraries:
             - pypi:
