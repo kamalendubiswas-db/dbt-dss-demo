@@ -1,5 +1,9 @@
 {{
     config( materialized='table',
+            post_hook=[
+              "OPTIMIZE {{ this }}",
+              "ANALYZE TABLE {{ this }} COMPUTE STATISTICS FOR ALL COLUMNS;"
+                      ],
             tags='fact',
           )
 
