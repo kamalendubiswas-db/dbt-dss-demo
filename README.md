@@ -85,6 +85,15 @@ databricks bundle run #Starts one of the jobs
 
 Read more about Databricks Asset bundles and how to install it [here](https://docs.databricks.com/en/dev-tools/bundles/index.html)
 
-### CI/CD
+## CI/CD
 
 We have chosen to show an example using Github Actions, but it is of course possible to implement a CI/CD process in the tool of your choice. For this example you, need to provide a PAT as `SP_TOKEN` secret variable in github.
+
+## Additional model configs
+For data warehousing, the following tblproperties are the most common for performance of incremental models that are highly flexible:
+
+`delta.feature.allowColumnDefaults`: `supported` — This property allows us to use generated and default columns on our delta tables.
+`delta.columnMapping.mode` : `name` — This property allows users to alter, rename, and reorder columns in existing Delta tables.
+`delta.enableDeletionVectors`: `true` — This property allows for up to 10x merge performance improvement by writing deletion vectors instead of re-writing entire files under the hood.
+
+In newer Databricks runtimes (and in DBSQL), these are usually enabled by default. In addition to these properties there are few other properties that can be set for the underlying Delta tables as part of model config - [Delta table properties reference](https://docs.databricks.com/en/delta/table-properties.html).
