@@ -23,7 +23,13 @@ jobs:
   deploy:
     name: "Deploy bundle"
     runs-on: ubuntu-latest
-
+    env:
+      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+      DATABRICKS_BUNDLE_ENV: qa
+      DBT_CATALOG: qa_dss_dbt_catalog
+      DBT_WORKSPACE: adb-984752964297111.11.azuredatabricks.net
+      DBT_HTTP_PATH: /sql/1.0/warehouses/2e78d4a8647e3893
+      DBT_PROFILES_DIR: ./
     steps:
       # Check out this repo, so that this workflow can access it.
       - uses: actions/checkout@v3
@@ -32,10 +38,21 @@ jobs:
       # See https://github.com/databricks/setup-cli
       - uses: databricks/setup-cli@main
 
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.9.x"
+
+      - name: Install dependencies
+        run: |
+            pip install pipenv
+            pipenv install
+            dbt deps --target dev
+        
+      - name: Run dbt models
+        run: dbt build --target dev
+
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
       - run: databricks bundle deploy
         working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
+

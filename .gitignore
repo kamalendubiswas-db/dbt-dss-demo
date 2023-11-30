@@ -166,7 +166,6 @@ logs/
 # end dbt Cloud content
 
 .DS_Store
-profiles.yml
 copy_profiles.yml
 .user.yml
 elementary_output.json
