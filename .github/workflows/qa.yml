@@ -46,9 +46,10 @@ jobs:
         run: |
             pip install pipenv
             pipenv install
+            pipenv shell
             dbt deps --target dev
         
-      - name: Run dbt models
+      - name: Build dbt models
         run: dbt build --target dev
 
       # Deploy the bundle to the "qa" target as defined
