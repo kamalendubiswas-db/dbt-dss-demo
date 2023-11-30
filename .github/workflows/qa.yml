@@ -21,7 +21,7 @@ jobs:
   # Bundle validation is automatically performed as part of this deployment.
   # If validation fails, this workflow fails.
   deploy:
-    name: "Deploy bundle"
+    name: "Run DBT in QA + Deploy bundle"
     runs-on: ubuntu-latest
     env:
       DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
@@ -44,9 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-            pip install pipenv
-            pipenv install
-            pipenv shell
+            pip install dbt-databricks==1.7.1
             dbt deps --target dev
         
       - name: Build dbt models
