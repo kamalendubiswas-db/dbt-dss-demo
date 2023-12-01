@@ -1,9 +1,6 @@
 {{
     config( materialized='table',
-            post_hook=[
-              "OPTIMIZE {{ this }}",
-              "ANALYZE TABLE {{ this }} COMPUTE STATISTICS FOR ALL COLUMNS;"
-                      ],
+            liquid_clustered_by='order_key',
             tags='fact',
           )
 
