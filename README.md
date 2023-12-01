@@ -69,8 +69,8 @@ We're excited to have you onboard and explore the fusion of dbt and Databricks w
 ## Deploying
 
 This project uses Databricks Asset bundles to deploy two jobs:
-* dbt_dss_job - Used to execute the DBT project stored in GIT
-* dbt_dss_setup_job - Used to run the setup scripts to create Catalogs, Volumes and Schemas
+* `dbt_dss_job` - Used to execute the DBT project stored in GIT
+* `dbt_dss_setup_job` - Used to run the setup scripts to create Catalogs, Volumes and Schemas
 
 To deploy these jobs you first need to configure the `Databricks.yml` file to point to the workspace(s) you want to deploy the project to.
 
@@ -89,7 +89,7 @@ Read more about Databricks Asset bundles and how to install it [here](https://do
 
 We have chosen to show an example using Github Actions, but it is of course possible to implement a CI/CD process in the tool of your choice. For this example you, need to provide a PAT as `SP_TOKEN` secret variable in github.
 
-## Additional model configs
+## Additional Model Configs
 For data warehousing, the following tblproperties are the most common for performance of incremental models that are highly flexible:
 
 - `delta.feature.allowColumnDefaults`: `supported` — This property allows us to use generated and default columns on our delta tables.
