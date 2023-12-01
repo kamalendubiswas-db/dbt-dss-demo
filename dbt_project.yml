@@ -41,6 +41,10 @@ models:
       +schema:  silver
       +tags:
         - silver_layer
+      +post_hook:
+        - "OPTIMIZE {{ this }}"
+        - "ANALYZE TABLE {{ this }} COMPUTE STATISTICS FOR ALL COLUMNS"
+                      
     gold_layer:
       +schema:  gold
       +tags:

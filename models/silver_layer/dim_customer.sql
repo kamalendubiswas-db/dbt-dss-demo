@@ -1,5 +1,6 @@
 {{
     config( materialized='table',
+            liquid_clustered_by='customer_key',
             tags='dimension'
           )
 
