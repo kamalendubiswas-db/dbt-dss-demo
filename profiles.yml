@@ -1,7 +1,7 @@
 default:
   target: dev
   outputs:
-    default:
+    dev:
       catalog: '{{ env_var(''DBT_CATALOG'') }}'
       host: '{{ env_var(''DATABRICKS_HOST'') }}'
       http_path: '{{ env_var(''DBT_HTTP_PATH'') }}'
