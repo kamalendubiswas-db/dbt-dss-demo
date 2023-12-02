@@ -11,7 +11,7 @@ concurrency: 1
 on:
   push:
     branches:
-      - main
+      - dev
 
 #Only deploy step needed in PRD as job is normally scheduled
 
@@ -19,7 +19,13 @@ jobs:
   deploy:
     name: "Deploy bundle"
     runs-on: ubuntu-latest
-
+    env:
+      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+      DATABRICKS_BUNDLE_ENV: prod
+      DBT_CATALOG: qa_dss_dbt_catalog
+      DATABRICKS_HOST: adb-984752964297111.11.azuredatabricks.net
+      DBT_HTTP_PATH: /sql/1.0/warehouses/2e78d4a8647e3893
+      DBT_PROFILES_DIR: ./
     steps:
       # Check out this repo, so that this workflow can access it.
       - uses: actions/checkout@v3
@@ -32,6 +38,3 @@ jobs:
       # in the bundle's settings file.
       - run: databricks bundle deploy
         working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: prod

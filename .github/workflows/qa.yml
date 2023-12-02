@@ -27,7 +27,7 @@ jobs:
       DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
       DATABRICKS_BUNDLE_ENV: qa
       DBT_CATALOG: qa_dss_dbt_catalog
-      DBT_WORKSPACE: adb-984752964297111.11.azuredatabricks.net
+      DATABRICKS_HOST: adb-984752964297111.11.azuredatabricks.net
       DBT_HTTP_PATH: /sql/1.0/warehouses/2e78d4a8647e3893
       DBT_PROFILES_DIR: ./
     steps:

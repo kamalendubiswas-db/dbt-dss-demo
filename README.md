@@ -44,6 +44,7 @@ The [dbt-databricks](https://github.com/databricks/dbt-databricks) adapter conta
 ├── Pipfile
 ├── Pipfile.lock
 ├── README.md
+├── profiles.yml
 ├── analyses
 ├── data #sample data
 ├── databricks_notebook
@@ -66,6 +67,16 @@ The [dbt-databricks](https://github.com/databricks/dbt-databricks) adapter conta
 
 We're excited to have you onboard and explore the fusion of dbt and Databricks within our data analytics ecosystem.
 
+## Local development
+
+To run the dbt project locally follow these steps:
+
+1. Make sure to use python 3.9
+2. Install pipenv - ```pip install pipenv```
+3. Run - ```pipenv install```
+4. Populate the required env variables found in ```example.env```, for example in a ```.env``` var, it wont be committed due the .gitignore file.
+5. Run ```dbt build```
+
 ## Deploying
 
 This project uses Databricks Asset bundles to deploy two jobs:
@@ -74,7 +85,7 @@ This project uses Databricks Asset bundles to deploy two jobs:
 
 To deploy these jobs you first need to configure the `Databricks.yml` file to point to the workspace(s) you want to deploy the project to.
 
-You also need to configure the two variables `catalog_name` and `warehouse_id`
+You also need to configure the environment variables found in the github actions job, in the .github/workflows/ folder.
 
 To deploy the jobs using bundles, you need to run two commands:
 
