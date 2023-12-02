@@ -21,9 +21,15 @@ jobs:
   # Bundle validation is automatically performed as part of this deployment.
   # If validation fails, this workflow fails.
   deploy:
-    name: "Deploy bundle"
+    name: "Run DBT in QA + Deploy bundle"
     runs-on: ubuntu-latest
-
+    env:
+      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+      DATABRICKS_BUNDLE_ENV: qa
+      DBT_CATALOG: qa_dss_dbt_catalog
+      DATABRICKS_HOST: adb-984752964297111.11.azuredatabricks.net
+      DBT_HTTP_PATH: /sql/1.0/warehouses/2e78d4a8647e3893
+      DBT_PROFILES_DIR: ./
     steps:
       # Check out this repo, so that this workflow can access it.
       - uses: actions/checkout@v3
@@ -32,10 +38,20 @@ jobs:
       # See https://github.com/databricks/setup-cli
       - uses: databricks/setup-cli@main
 
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.9.x"
+
+      - name: Install dependencies
+        run: |
+            pip install dbt-databricks==1.7.1
+            dbt deps --target dev
+        
+      - name: Build dbt models
+        run: dbt build --target dev
+
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
       - run: databricks bundle deploy
         working-directory: .
-        env:
-          DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
-          DATABRICKS_BUNDLE_ENV: qa
+

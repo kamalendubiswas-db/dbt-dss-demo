@@ -16,6 +16,9 @@ variables:
   git_branch:
     description: Catalog to use
     default: ${bundle.git.branch}
+  host:
+    description: Workspace host
+    default: https://adb-984752964297111.11.azuredatabricks.net
 
 targets:
   # The 'dev' target, used for development purposes.
@@ -28,8 +31,6 @@ targets:
     default: true
     variables:
       dbt_catalog: dev_dss_dbt_catalog
-    workspace:
-      host: https://adb-984752964297111.11.azuredatabricks.net
     resources:
       jobs:
         dbt_dss_job:
@@ -45,8 +46,6 @@ targets:
     mode: development
     variables:
       dbt_catalog: qa_dss_dbt_catalog
-    workspace:
-      host: https://adb-984752964297111.11.azuredatabricks.net
     resources:
       jobs:
         dbt_dss_job:
@@ -65,7 +64,6 @@ targets:
     variables:
       dbt_catalog: prod_dss_dbt_catalog
     workspace:
-      host: https://adb-984752964297111.11.azuredatabricks.net
       root_path: /Shared/.bundle/prod/${bundle.name}
     run_as:
       # This runs as gustav.byberg@databricks.com in production. Alternatively,
