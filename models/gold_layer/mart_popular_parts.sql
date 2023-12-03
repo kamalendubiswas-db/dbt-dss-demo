@@ -6,18 +6,17 @@
 }}
 
 select
-  dps.part_name,
-  dps.part_type,
-  count(fol.part_key) as total_part_sold,
-  count(distinct fol.supplier_key) as total_available_supplier
+    dps.part_name,
+    dps.part_type,
+    count(fol.part_key) as total_part_sold,
+    count(distinct fol.supplier_key) as total_available_supplier
 from
-  {{ ref('fact_order_line') }} fol
-  inner join {{ ref('dim_part') }} dps on dps.part_key = fol.part_key
+    {{ ref('fact_order_line') }} as fol
+inner join {{ ref('dim_part') }} as dps on fol.part_key = dps.part_key
 group by
-  dps.part_name,
-  dps.part_type
+    dps.part_name,
+    dps.part_type
 order by
-  total_part_sold desc
+    total_part_sold desc
 limit
-  100
-  
+    100

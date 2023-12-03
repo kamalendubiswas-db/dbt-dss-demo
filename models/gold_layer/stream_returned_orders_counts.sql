@@ -7,10 +7,10 @@
 
 SELECT
     receipt_date,
-    count(order_id) count_of_returned_order
+    count(order_id) AS count_of_returned_order
 FROM
-  STREAM( {{ ref('stream_order_line') }} )
+    stream({{ ref('stream_order_line') }})
 WHERE
-  return_flag = 'R'
+    return_flag = 'R'
 GROUP BY
-  receipt_date
+    receipt_date

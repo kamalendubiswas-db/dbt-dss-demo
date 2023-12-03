@@ -7,6 +7,8 @@ name = "pypi"
 dbt-databricks = "1.7.1"
 databricks-connect = "*"
 databricks-sdk = "*"
+sqlfluff = "*"
+sqlfluff-templater-dbt = "*"
 
 [dev-packages]
 

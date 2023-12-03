@@ -8,9 +8,9 @@
 SELECT
     part_id,
     receipt_date,
-    sum(quantity) quantity_sold
+    sum(quantity) AS quantity_sold
 FROM
-  STREAM( {{ ref('stream_order_line') }} )
+    stream({{ ref('stream_order_line') }})
 GROUP BY
-  part_id,
-  receipt_date
+    part_id,
+    receipt_date
