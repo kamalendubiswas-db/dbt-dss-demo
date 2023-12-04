@@ -9,3 +9,11 @@ default:
       threads: 8
       token: '{{ env_var(''DATABRICKS_TOKEN'') }}'
       type: databricks
+    clone:
+      catalog: gustav_dss_test
+      host: '{{ env_var(''DATABRICKS_HOST'') }}'
+      http_path: '{{ env_var(''DBT_HTTP_PATH'') }}'
+      schema: bronze
+      threads: 8
+      token: '{{ env_var(''DATABRICKS_TOKEN'') }}'
+      type: databricks

@@ -49,9 +49,13 @@ models:
       +schema:  gold
       +tags:
         - gold_layer
+  dbt_artifacts:
+   +schema: dbt_artifacts
 
 seeds:
   dss_dbt_project:
     +enabled: true
     +tags:  "seed"
     +schema:  bronze
+
+on-run-end: "{{ dbt_artifacts.upload_results(results) }}"

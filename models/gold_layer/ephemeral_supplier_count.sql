@@ -7,12 +7,12 @@
 }}
 
 select
-  dc.country,
-  count(distinct fol.supplier_key) as total_suppliers,
-  sum(fol.total_price) as total_amount_supplied
+    dc.country,
+    count(distinct fol.supplier_key) as total_suppliers,
+    sum(fol.total_price) as total_amount_supplied
 from
-  {{ ref('fact_order_line') }}  fol
-  inner join {{ ref('dim_supplier') }}  ds on ds.supplier_key = fol.supplier_key
-  inner join {{ ref('dim_country') }}  dc on dc.country_id = ds.country_id
+    {{ ref('fact_order_line') }} as fol
+inner join {{ ref('dim_supplier') }} as ds on fol.supplier_key = ds.supplier_key
+inner join {{ ref('dim_country') }} as dc on ds.country_id = dc.country_id
 group by
-  dc.country
+    dc.country

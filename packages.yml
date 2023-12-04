@@ -11,3 +11,6 @@ packages:
   
   - package: dbt-labs/dbt_external_tables
     version: 0.8.7
+  
+  - package: brooklyn-data/dbt_artifacts # Uploads information about the DBT project into tables that can be used for status dashboards
+    version: 2.6.2
