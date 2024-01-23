@@ -75,7 +75,8 @@ To run the dbt project locally follow these steps:
 2. Install pipenv - ```pip install pipenv```
 3. Run - ```pipenv install```
 4. Populate the required env variables found in ```example.env```, for example in a ```.env``` var, it wont be committed due the .gitignore file.
-5. Run ```dbt build```
+5. Run ```source .env```
+6. Run ```dbt build --exclude tag:stream``` or ```dbt build``` to try out streaming tables if your workspace is enabled for it.
 
 ## Deploying
 
