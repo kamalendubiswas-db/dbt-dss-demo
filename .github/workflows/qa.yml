@@ -49,7 +49,7 @@ jobs:
             dbt deps --target dev
         
       - name: Build dbt models
-        run: dbt build --target dev
+        run: dbt build --target dev tag:stream
 
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
