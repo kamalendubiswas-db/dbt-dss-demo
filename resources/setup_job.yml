@@ -11,6 +11,7 @@ resources:
             notebook_path: ../databricks_notebook/Databricks_Environment_Setup.py
             base_parameters:
               Catalog Name: ${var.dbt_catalog}
+              Schema Prefix: ${var.schema_prefix}
 
       job_clusters:
         - job_cluster_key: job_cluster

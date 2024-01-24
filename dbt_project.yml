@@ -6,6 +6,10 @@ name: 'dss_dbt_project'
 version: '1.0.0'
 config-version: 2
 
+vars:
+  # Schema prefix to set
+  schema_prefix: "{{ env_var('DBT_SCHEMA_PREFIX') }}"
+
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
 

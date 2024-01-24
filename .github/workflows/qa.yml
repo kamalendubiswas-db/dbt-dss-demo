@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: qa
     env:
-      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+      DBT_ENV_SECRET_DB_TOKEN: ${{ secrets.SP_TOKEN }}
       DATABRICKS_BUNDLE_ENV:  ${{ vars.DATABRICKS_BUNDLE_ENV }}
       DBT_CATALOG:  ${{ vars.DBT_CATALOG }}
       DATABRICKS_HOST:  ${{ vars.DATABRICKS_HOST }}
