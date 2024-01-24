@@ -8,7 +8,7 @@ config-version: 2
 
 vars:
   # Schema prefix to set
-  schema_prefix: "{{ env_var('DBT_SCHEMA_PREFIX') }}"
+  schema_prefix: "{{ env_var('DBT_SCHEMA_PREFIX', '') }}"
 
 # This setting configures which "profile" dbt uses for this project.
 profile: 'default'
