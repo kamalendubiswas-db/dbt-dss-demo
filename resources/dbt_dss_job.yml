@@ -8,7 +8,7 @@ resources:
             project_directory: ""
             commands:
               - dbt deps
-              - dbt build
+              - "dbt build --exclude tag:stream --vars 'schema_prefix: ${var.schema_prefix}'" # Remove exclude if you want to run with streaming tables
             warehouse_id: ${var.warehouse_id} 
             catalog: ${var.dbt_catalog}
           job_cluster_key: dbt_CLI

@@ -10,6 +10,9 @@ variables:
   dbt_catalog:
     description: Catalog to use
     default: dss_dbt_catalog
+  schema_prefix:
+    description: Schema prefix to use
+    default:
   warehouse_id:
     description: Databricks SQL warehouse to use
     default: 2e78d4a8647e3893

@@ -2,7 +2,7 @@
     config(
         materialized='materialized_view',
         tblproperties={"delta.enableChangeDataFeed":"true"},
-        tags='mart',
+        tags=['mart', 'stream'],
 
     )
 }}
@@ -19,4 +19,4 @@ inner join
     {{ ref('ephemeral_customer_count') }} as cc
     on sc.country = cc.country
 order by
-    country
+    sc.country

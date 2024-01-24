@@ -75,7 +75,8 @@ To run the dbt project locally follow these steps:
 2. Install pipenv - ```pip install pipenv```
 3. Run - ```pipenv install```
 4. Populate the required env variables found in ```example.env```, for example in a ```.env``` var, it wont be committed due the .gitignore file.
-5. Run ```dbt build```
+5. Run ```source .env```
+6. Run ```dbt build --exclude tag:stream``` or ```dbt build``` to try out streaming tables if your workspace is enabled for it. There is one variable you can set, but by default it is controlled by an environment variable called ```DBT_SCHEMA_PREFIX```, so you should not need to set the variable like this: ```dbt build --exclude tag:stream --vars 'schema_prefix: my_schema_prefix'```
 
 ## Deploying
 
@@ -93,8 +94,16 @@ To deploy the jobs using bundles, you need to run two commands:
 databricks bundle deploy #Deploys artefacts to the workspace
 databricks bundle run #Starts one of the jobs
 ```
+The ```dbt_dss_setup_job``` loads all the data that this DBT repo is going to using.
 
 Read more about Databricks Asset bundles and how to install it [here](https://docs.databricks.com/en/dev-tools/bundles/index.html)
+
+### Deploying without bundles
+
+In case you are lacking access to use the Databricks CLI and DABs and want to set things up manually you can:
+
+- Import the notebook ```databricks_notebook/Databricks_Environment_Setup.py``` directly from the github repository by URL. Then run it to setup the data and create schemas and volumes etc for this repo.
+- Create a workflow with a DBT task referencing this repo or your fork.
 
 ## CI/CD
 

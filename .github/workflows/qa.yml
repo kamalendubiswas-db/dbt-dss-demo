@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: qa
     env:
-      DATABRICKS_TOKEN: ${{ secrets.SP_TOKEN }}
+      DBT_ENV_SECRET_DB_TOKEN: ${{ secrets.SP_TOKEN }}
       DATABRICKS_BUNDLE_ENV:  ${{ vars.DATABRICKS_BUNDLE_ENV }}
       DBT_CATALOG:  ${{ vars.DBT_CATALOG }}
       DATABRICKS_HOST:  ${{ vars.DATABRICKS_HOST }}
@@ -49,7 +49,7 @@ jobs:
             dbt deps --target dev
         
       - name: Build dbt models
-        run: dbt build --target dev
+        run: dbt build --target dev --exclude tag:stream
 
       # Deploy the bundle to the "qa" target as defined
       # in the bundle's settings file.
