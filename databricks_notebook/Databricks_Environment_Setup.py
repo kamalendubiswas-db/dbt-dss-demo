@@ -20,12 +20,14 @@ print(f"Using schema prefix: {schema_prefix}")
 
 spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog_name}")
 
-spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.{schema_prefix}bronze")
+spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.bronze") #Only one bronze schema per catalog is needed
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.{schema_prefix}silver")
 spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog_name}.{schema_prefix}gold")
 
-spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.{schema_prefix}bronze.raw_data;")
-spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.{schema_prefix}bronze.dbt_artefacts;")
+spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.raw_data;")
+spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.bronze.dbt_artefacts;")
+
+spark.sql(f"GRANT ALL PRIVILEGES ON SCHEMA {catalog_name}.bronze TO `account users`;")
 
 # COMMAND ----------
 
@@ -33,13 +35,13 @@ spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog_name}.{schema_prefix}bronze.dbt
 # MAGIC %sh
 # MAGIC rm -rf dbt-dss-demo-dev.zip \
 # MAGIC   && curl -LJO https://github.com/kamalendubiswas-db/dbt-dss-demo/archive/dev.zip \
-# MAGIC   && unzip -jo dbt-dss-demo-dev.zip 'dbt-dss-demo-dev/data/*.csv' -d /Volumes/$catalog_name/"$schema_prefix"bronze/raw_data \
+# MAGIC   && unzip -jo dbt-dss-demo-dev.zip 'dbt-dss-demo-dev/data/*.csv' -d /Volumes/$catalog_name/bronze/raw_data \
 # MAGIC   && rm -rf dbt-dss-demo-dev.zip
 
 # COMMAND ----------
 
 # DBTITLE 1,UC Volume path for the raw data
-raw_data = f"/Volumes/{catalog_name}/{schema_prefix}bronze/raw_data"
+raw_data = f"/Volumes/{catalog_name}/bronze/raw_data"
 
 # COMMAND ----------
 
@@ -62,7 +64,7 @@ cleaned_customers = raw_customers.withColumnsRenamed(
                                                      "_c7": "comment",
                                                      "_c8": "extra"}
                                                   )
-cleaned_customers.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_customers", mode="overwrite")
+cleaned_customers.write.saveAsTable(f"{catalog_name}.bronze.raw_customers", mode="overwrite")
 
 
 # COMMAND ----------
@@ -87,7 +89,7 @@ cleaned_orders = raw_orders.withColumnsRenamed(
                                                      "_c8": "comment",
                                                      "_c9": "extra"}
                                                   )
-cleaned_orders.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_orders", mode="overwrite")
+cleaned_orders.write.saveAsTable(f"{catalog_name}.bronze.raw_orders", mode="overwrite")
 
 
 # COMMAND ----------
@@ -112,7 +114,7 @@ cleaned_parts = raw_parts.withColumnsRenamed(
                                                      "_c8": "comment",
                                                      "_c9": "extra"}
                                                   )
-cleaned_parts.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_parts", mode="overwrite")
+cleaned_parts.write.saveAsTable(f"{catalog_name}.bronze.raw_parts", mode="overwrite")
 
 
 # COMMAND ----------
@@ -135,7 +137,7 @@ cleaned_suppliers = raw_suppliers.withColumnsRenamed(
                                                      "_c6": "comment",
                                                      "_c7": "extra"}
                                                   )
-cleaned_suppliers.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_suppliers", mode="overwrite")
+cleaned_suppliers.write.saveAsTable(f"{catalog_name}.bronze.raw_suppliers", mode="overwrite")
 
 
 # COMMAND ----------
@@ -167,7 +169,7 @@ cleaned_lineitems = raw_lineitems.withColumnsRenamed(
                                                      "_c15": "comment",
                                                      "_c16": "extra"}
                                                   )
-cleaned_lineitems.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_lineitems", mode="overwrite")
+cleaned_lineitems.write.saveAsTable(f"{catalog_name}.bronze.raw_lineitems", mode="overwrite")
 
 
 # COMMAND ----------
@@ -186,7 +188,7 @@ cleaned_nations = raw_nations.withColumnsRenamed(
                                                      "_c2": "comment",
                                                      "_c3": "extra"}
                                                   )
-cleaned_nations.write.saveAsTable(f"{catalog_name}.{schema_prefix}bronze.raw_nations", mode="overwrite")
+cleaned_nations.write.saveAsTable(f"{catalog_name}.bronze.raw_nations", mode="overwrite")
 
 
 # COMMAND ----------
